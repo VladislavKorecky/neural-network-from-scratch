@@ -13,7 +13,7 @@ class CrossEntropy(LossFunctionInterface):
         # clip the values to avoid numerical instability
         clipped_output = np.clip(output, 1e-15, 1 - 1e-15)
 
-        return -np.sum(target * np.log(clipped_output), axis=1)
+        return -np.sum(target * np.log(clipped_output))
 
     def derive(self, output: np.ndarray, target: np.ndarray) -> np.ndarray:
         # clip the values to avoid numerical instability
