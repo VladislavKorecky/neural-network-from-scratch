@@ -10,7 +10,7 @@ class MeanSquaredError(LossFunctionInterface):
     """
 
     def distance(self, output: np.ndarray, target: np.ndarray) -> np.ndarray:
-        return np.power(output - target, 2)
+        return np.power(output - target, 2).mean()
 
     def derive(self, output: np.ndarray, target: np.ndarray) -> np.ndarray:
         return 2 * (output - target)

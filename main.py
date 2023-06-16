@@ -46,8 +46,6 @@ accuracy_history = []
 #    TRAINING
 # --------------
 for epoch in range(EPOCHS):
-    # tracks losses per epoch, in other words tracks the loss of each datapoint
-    epoch_losses = []
 
     # get random indexes from the training data to form a batch
     batch_indexes = np.random.choice(training_dataset.shape[0], BATCH_SIZE, replace=False)
@@ -68,7 +66,8 @@ for epoch in range(EPOCHS):
         network_input = flat_image / np.linalg.norm(flat_image)
 
         # convert the label into a one-hot vector
-        one_hot_label = np.eye(10)[label]
+        one_hot_label = np.zeros(10)
+        one_hot_label[label] = 1
 
         # make a prediction with the network
         prediction = net.forward(network_input)

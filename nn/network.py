@@ -75,7 +75,7 @@ class NeuralNetwork:
             gradient = layer.backward(gradient)
 
         # calculate the loss to serve as a measure of performance
-        return self.loss_function.distance(self.output, target).mean()
+        return self.loss_function.distance(self.output, target)
 
     def update_parameters(self, learning_rate: float) -> None:
         """

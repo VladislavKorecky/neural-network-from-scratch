@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 class LossFunctionInterface(ABC):
     @abstractmethod
-    def distance(self, output: np.ndarray, target: np.ndarray) -> np.ndarray:
+    def distance(self, output: np.ndarray, target: np.ndarray) -> float:
         """
         Calculate the loss based on the output and the desired output.
 
@@ -14,7 +14,7 @@ class LossFunctionInterface(ABC):
             target (ndarray): Correct/Desired network output. Sometimes referred to as the target of a label.
 
         Returns:
-            ndarray: The loss (also referred to as error or cost) between the output and the target for each element.
+            float: Scalar loss (also referred to as error or cost) between the output and the target for each element.
         """
 
         pass
