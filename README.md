@@ -1,11 +1,86 @@
-# MNIST Neural Network Classifier From Scratch
-This repository contains code for a neural network classifier done only using the NumPy library (plus Matplotlib for visualization and idx2numpy to load the dataset). The neural network successfully learns to classify images from the famous MNIST dataset. The code also contains two loss functions (MSE and Cross Entropy), five activation functions (ReLU, LeakyReLU, Sigmoid, Softmax, Tanh) and supports batch/mini-batch gradient descent.
+# Neural Network from Scratch
 
-## Setup
-In order to use this repository, you first need to install the required libraries. Move ("cd") to the project folder and run the following command: `pip install -r requirements.txt`
+A modular neural network implementation in Python using NumPy. This project implements basic deep learning components without using high-level frameworks like PyTorch or TensorFlow.
 
-## Running the code
-If you want to train the neural network you can run `main.py`. You'll see the network's accuracy printed in the terminal as the AI trains. Once the training is done, a graph will appear showing the accuracy over time. After the graph is closed, an automatic test will occur that calculates the network's accuracy for all data points in both the training and testing dataset.
+The library includes a demonstration of training a classifier on the MNIST dataset.
 
-## Config
-You can configure the training process at the top of the `main.py` file. You can easily specify the number of epochs, the batch size, and the learning rate. If you scroll down to the setup section, you can modify the array of layers to include different activation functions, add/remove neurons, etc.
+## Features
+
+- **Modular Architecture**: Define networks with arbitrary layers and neurons.
+- **Supported Components**:
+  - **Activation Functions**: ReLU, Leaky ReLU, Sigmoid, Softmax, Tanh, and Linear.
+  - **Loss Functions**: Mean Squared Error (MSE) and Cross-Entropy.
+- **Backpropagation**: Implementation of the backpropagation algorithm for gradient calculation.
+- **Batch Training**: Support for mini-batch gradient descent.
+- **MNIST Integration**: Utilities for loading the MNIST dataset from `.ubyte` files.
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.x
+- NumPy
+- Matplotlib
+- idx2numpy
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/neural-network-from-scratch.git
+   cd neural-network-from-scratch
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Running the Demo
+
+To train the network on the MNIST dataset:
+
+```bash
+python main.py
+```
+
+The script will:
+1. Load MNIST data from the `mnist/` directory.
+2. Initialize a 3-layer network.
+3. Train the network and plot accuracy over time.
+4. Output final training and testing accuracy.
+
+## Architecture
+
+- `nn/network.py`: `NeuralNetwork` class for forward and backward passes.
+- `nn/layer.py`: `Layer` class for weight and bias management.
+- `nn/activations/`: Implementation of activation functions.
+- `nn/loss_functions/`: Implementation of loss functions.
+- `utils.py`: Testing and accuracy utilities.
+
+## Example Usage
+
+```python
+from nn.network import NeuralNetwork
+from nn.layer import Layer
+from nn.activations.tanh import Tanh
+from nn.activations.softmax import Softmax
+from nn.loss_functions.cross_entropy import CrossEntropy
+
+# Initialize network
+net = NeuralNetwork([
+    Layer(784, 16, Tanh()),
+    Layer(16, 16, Tanh()),
+    Layer(16, 10, Softmax())
+], CrossEntropy())
+
+# Training step
+output = net.forward(input_data)
+loss = net.backward(target_label)
+net.update_parameters(learning_rate=0.1)
+net.zero_grad()
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
